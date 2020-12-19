@@ -72,6 +72,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+# Authentication ログイン、ログアウトのURLを設定
+LOGIN_URL = '/'
+LOGOUT_URL = 'rest_framework:login'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
