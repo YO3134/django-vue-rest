@@ -116,6 +116,13 @@ USE_L10N = True
 
 USE_TZ = True
 
+# REST Framework
+REST_FRAMEWORK = {
+    # デフォルト認証の記述 DEFAULT_AUTHENTICATION_CLASSES
+    'DEFAULT_AUTHENTICATION_CLASSES' : [
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
