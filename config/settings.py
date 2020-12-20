@@ -56,7 +56,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        #  temaplatefileの検索ディレクトリに[<basedirectory>/templates]
+        #  templatefileの検索ディレクトリに[<basedirectory>/templates]
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -131,6 +131,8 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+# Staticfileの検索ディレクトリに「<basedirectory>/static」を設定
+STATICFILES = [os.path.join(BASE_DIR, 'static')]
 
 # ローカル環境変数の読み込み
 try:
