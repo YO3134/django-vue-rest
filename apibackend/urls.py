@@ -3,6 +3,8 @@ from rest_framework import routers
 
 from . import views
 
+# rest_framework  Routers
+# https://www.django-rest-framework.org/api-guide/routers/
 router = routers.DefaultRouter()
 router.register("books", views.BookViewSet)
 
