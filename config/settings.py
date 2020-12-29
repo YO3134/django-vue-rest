@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",  # add rest_framework
+    "djoser",  # add djoser
     "apibackend.apps.ApibackendConfig",  # add Apps
     "store.apps.StoreConfig",  # add Apps
 ]
@@ -124,8 +125,13 @@ USE_TZ = True
 REST_FRAMEWORK = {
     # デフォルト認証の記述 DEFAULT_AUTHENTICATION_CLASSES
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",
-    ]
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
+}
+
+SIMPLE_JWT = {
+    "AUTH_HEADER_TYPES": ("JWT",),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
 }
 
 # Static files (CSS, JavaScript, Images)
