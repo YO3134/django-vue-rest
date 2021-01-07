@@ -15,4 +15,34 @@ const router = new VueRouter({
     ]
 })
 
+router.beforeEach((to, from, next) => {
+    const isLoggedIn = store.getters['auth/isLoggedIn']
+    const token = localStorage.getItem('access')
+    console.log('to.path=', to.path)
+    console.log('isLoggedIn=', isLoggedIn)
 
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (isLoggedIn) {
+            console.log('User is already logged in. So, free to next.')
+            next()
+        } else {
+            if (token != null) {
+                console.log('User is not logged in. Trying to reload again.')
+
+                store.dispatch('auth/reload')
+                  .then(() => {
+                      console.log('Succeeded to reload. So, free to next.')
+                      next()
+                  })
+                  .catch(() => {
+                      forceToLoginPage(to, from, next)
+                  })
+            } else {
+                forceToLoginPage(to, from, next)
+            }
+        }
+    } else {
+        console.log('Go to public page.')
+        next()
+    }
+})
