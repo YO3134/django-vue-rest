@@ -46,3 +46,13 @@ router.beforeEach((to, from, next) => {
         next()
     }
 })
+
+function forceToLoginPage (to, from, next) {
+    console.log('Force user to login page')
+    next({
+        path: '/login',
+        query: { next: to.fullPath }
+    })
+}
+
+export default router
