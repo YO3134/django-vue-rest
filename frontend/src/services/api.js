@@ -9,3 +9,15 @@ const api = axios.create({
         'X-Requested-With': 'XMLHttpRequest'
     }
 })
+
+api.interceptors.request.use(function (config) {
+    store.dispatch('message/clearMessage')
+    const token = localStorage.getItem('access')
+    if (token) {
+        config.headers.Authorization = 'JWT' + token
+        return config
+    }
+    return config
+}, function (error) {
+    return Promise.reject(error)
+})
