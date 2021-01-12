@@ -21,3 +21,34 @@ api.interceptors.request.use(function (config) {
 }, function (error) {
     return Promise.reject(error)
 })
+
+api.interceptors.response.use(function (response) {
+    return response
+}, function (error) {
+    console.log('error.respon=', error.response)
+    const status = error.response ? error.response.status : 500
+
+    let message
+    if (status === 400) {
+        let message = [].concat.apply([], Object.values(error.response.data))
+        store.dispatch('message/setWarningMessages', { message: message })
+    } else if (status === 401) {
+        const token = localStorage.getItem('access')
+        if (token != null) {
+            message = 'ログイン有効期限切れ'
+        } else {
+            message = '認証エラー'
+        }
+        store.dispatch('auth/logout')
+        store.dispatch('message/setErrorMessage', { message: message })
+    } else if (status === 403) {
+        message = '権限エラー'
+        store.dispatch('message/setErrorMessage', { message: message })
+    } else {
+        message = '想定外エラー'
+        store.dispatch('message/setErrorMessage', { message: message })
+    }
+    return Promise.reject(error)
+})
+
+export default api
