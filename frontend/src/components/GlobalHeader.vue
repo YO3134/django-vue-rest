@@ -12,3 +12,27 @@
         </b-navbar>
     </div>
 </template>
+
+<script>
+export default {
+    computed: {
+        username: function () {
+            return this.$store.getters['auth/username']
+        },
+        isLoggedIn: function () {
+            return this.$store.getters['auth/isLoggedIn']
+        }
+    },
+    methods: {
+        clickLogout: function () {
+            this.$store.dispatch('auth/logout')
+            this.$store.dispatch('message/setInfoMessage', { message: 'ログアウトしました'})
+            this.$router.replace('/login')
+        },
+        clickLogin: function () {
+            this.$store.dispatch('message/clearMessages')
+            this.$store.dispatch('/login')
+        }
+    }
+}
+</script>
