@@ -1,0 +1,13 @@
+<template>
+    <div id="messages">
+        <b-alert variant="danger" show v-show="message.error" class="mb-0">
+            {{ message.error }}
+        </b-alert>
+        <b-alert variant="warning" show v-show="message.warnings.length > 0" class="mb-0">
+            <p v-for="warning in message.warnings" class="mb-0">{{ warning }}</p>
+        </b-alert>
+        <b-alert variant="into" show v-show="message.info">
+            {{ message.info }}
+        </b-alert>
+    </div>
+</template>
