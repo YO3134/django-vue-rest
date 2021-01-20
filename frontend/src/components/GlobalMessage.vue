@@ -11,3 +11,12 @@
         </b-alert>
     </div>
 </template>
+<script>
+export default {
+    computed: {
+        message: function () {
+            return this.$store.state.message
+        }
+    }
+}
+</script>
